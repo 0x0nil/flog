@@ -2,6 +2,7 @@ package flog
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"strings"
 	"sync"
@@ -11,6 +12,12 @@ import (
 var (
 	host = "unknownhost"
 )
+
+func NewLogger(file string) *log.Logger {
+	w := New(file)
+	logger := log.New(w, "", log.Ldate|log.Ltime|log.Lmicroseconds)
+	return logger
+}
 
 func init() {
 	h, err := os.Hostname()
